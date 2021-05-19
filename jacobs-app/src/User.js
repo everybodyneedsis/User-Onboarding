@@ -9,17 +9,7 @@ function User({ details }) {
       <div className='user container'>
         <h2>{details.name}</h2>
         <p>Email: {details.email}</p>
-        <p>Terms of Service {details.termsOfService}</p>
-  
-        {
-          !!details.hobbies && !!details.hobbies.length &&
-          <div>
-            Hobbies:
-            <ul>
-              {details.hobbies.map((like, idx) => <li key={idx}>{like}</li>)}
-            </ul>
-          </div>
-        }
+        <p>Terms of Service: {details.termsOfService ? 'Accepted' : 'Denied'} </p>
       </div>
     )
   }

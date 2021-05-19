@@ -53,7 +53,7 @@ export default function Form(props) {
 
         <label>Terms Of Service
           <input
-            value={values.termsOfService}
+            checked={values.termsOfService}
             onChange={onChange}
             name='termsOfService'
             type='checkbox'
