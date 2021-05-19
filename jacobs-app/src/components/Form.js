@@ -5,6 +5,7 @@ export default function Form(props) {
         values,
         submit,
         change,
+        errors,
     } = props
 
     const onSubmit = evt => {
@@ -13,11 +14,12 @@ export default function Form(props) {
     }
 
     const onChange = evt => {
-        /* 🔥 FIX THIS SO IT ALSO WORKS WITH CHECKBOXES */
         const { name, value, checked, type } = evt.target
         const valueToUse = type === 'checkbox' ? checked : value
         change(name, valueToUse)
     }
+
+
 
 
     return (
@@ -57,6 +59,16 @@ export default function Form(props) {
             type='checkbox'
           />
         </label>
+
+        <button type='submit'>Submit</button>
+
+        <div className='errors'>
+          <div>{errors.name}</div>
+          <div>{errors.email}</div>
+          <div>{errors.password}</div>
+          <div>{errors.termsOfService}</div>
+        </div>
+
     </form>
     )
 }

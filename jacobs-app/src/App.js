@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react'
 import schema from './formSchema'
 import * as yup from 'yup'
 import axios from 'axios'
+import User from './User'
 
 const initialFormValues = {
   name: '',
@@ -28,9 +29,10 @@ function App() {
 
 
   const postNewUser = newUser => {
-    axios.post('http://buddies.com/api/friends', newUser)
+    axios.post('https://reqres.in/api/users', newUser)
       .then(res => {
         setUsers([res.data, ...users])
+        console.log(res.data)
       })
       .catch(err => {
         console.log(err)
@@ -75,7 +77,17 @@ function App() {
         values={formValues}
         change={inputChange}
         submit={formSubmit}
+        errors={formErrors}
       />
+
+      {
+        users.map(user => {
+          return (
+            <User key={user.id} details={user} />
+          )
+        })
+      }
+
     </div>
   );
 }
