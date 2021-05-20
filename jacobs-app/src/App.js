@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import Form from './components/Form'
 import React, { useState, useEffect } from 'react'
@@ -6,6 +5,7 @@ import schema from './formSchema'
 import * as yup from 'yup'
 import axios from 'axios'
 import User from './User'
+
 
 const initialFormValues = {
   name: '',
@@ -21,11 +21,13 @@ const initialFormErrors = {
   termsOfService: '',
 }
 const initialUsers = []
+const initialDisabled = true
 
 function App() {
   const [users, setUsers] = useState(initialUsers)
   const [formValues, setFormValues] = useState(initialFormValues) 
   const [formErrors, setFormErrors] = useState(initialFormErrors)
+  const [disabled, setDisabled] = useState(initialDisabled)
 
 
   const postNewUser = newUser => {
@@ -67,19 +69,24 @@ function App() {
       }))
       .catch(err => setFormErrors({
         ...formErrors, 
-        [name]: err.errors[0]
+        [name]: err.formErrors
       }))
   }
 
+  useEffect(() => {
+    schema.isValid(formValues).then(valid => setDisabled(!valid))
+  }, [formValues])
+
   return (
     <div className="container">
-      <h1>Welcome</h1>
+      <h1>Welcome to The Jacob Show</h1>
       <div className="App container">
       <Form 
         values={formValues}
         change={inputChange}
         submit={formSubmit}
-        errors={formErrors}
+        reset={formErrors}
+        disabled={disabled}
       />
 
       {

@@ -5,10 +5,12 @@ const StyledFriend = styled.div`
   width: 60%;
   display: flex;
   justify-content: space-between;
-  padding: 8px;
+  padding: 20px;
   border-bottom: 2px solid white;
+  margin-bottom: 20px;
+  border-radius: 5px;
 
-  background-color: ${props => props.theme.primaryColor};
+  background-color: ${props => props.theme.tertiaryColor};
   color: ${props => props.theme.white};
 
   @media ${props => props.theme.breakpointMobile} {
@@ -18,7 +20,7 @@ const StyledFriend = styled.div`
   transition: all 0.2s ease-in-out;
   &:hover {
     transition: all 0.2s ease-in-out;
-    background-color: ${props => props.theme.secondaryColor};
+    background-color: ${props => props.theme.black};
   }
 
   button {
@@ -34,13 +36,14 @@ export default function Form(props) {
         values,
         submit,
         change,
-        errors,
+        disabled
     } = props
 
     const onSubmit = evt => {
         evt.preventDefault()
         submit()
     }
+
 
     const onChange = evt => {
         const { name, value, checked, type } = evt.target
@@ -50,14 +53,14 @@ export default function Form(props) {
 
     return (
         <StyledFriend>
-            <form onSubmit={onSubmit}>
+          <form onSubmit={onSubmit}>
         <h2>Become a Member:</h2>
         <label> Name:
             <input 
-                value={values.name}
-                onChange={onChange}
-                name='name'
-                type='text'
+              value={values.name}
+              onChange={onChange}
+              name='name'
+              type='text'
             />
         </label>
 
@@ -88,14 +91,7 @@ export default function Form(props) {
           />
         </label>
 
-        <button type='submit'>Submit</button>
-
-        <div className='errors'>
-          <div>{errors.name}</div>
-          <div>{errors.email}</div>
-          <div>{errors.password}</div>
-          <div>{errors.termsOfService}</div>
-        </div>
+        <button id='submit' disabled={disabled}>submit</button>
 
     </form>
         </StyledFriend>
