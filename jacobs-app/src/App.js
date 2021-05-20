@@ -72,7 +72,9 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="container">
+      <h1>Welcome</h1>
+      <div className="App container">
       <Form 
         values={formValues}
         change={inputChange}
@@ -89,6 +91,8 @@ function App() {
       }
 
     </div>
+  </div>
+    
   );
 }
 
